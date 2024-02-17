@@ -425,13 +425,13 @@ section .title::after{
 #github{
     margin-top: 40px;
 }
-.gitcalender{
+.react-activity-calendar{
     text-align: center;
     margin-bottom: 15px;
     /* border: 2px solid green; */
    
 }
-.gitcalender>img{
+.react-activity-calendar>img{
     width: 100%;
 }
 .gitstats{
