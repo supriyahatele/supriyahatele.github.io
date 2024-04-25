@@ -65,7 +65,7 @@ section .title::before{
     left: 50%;
     width: 180px;
     height: 3px;
-    background: #111;
+    background: teal;
     transform: translateX(-50%);
 }
 section .title::after{
@@ -90,7 +90,7 @@ section .title::after{
 }
 .navbar.sticky{
     padding: 15px 0;
-    background: teal;
+    background: teal ;
 }
 .navbar .max-width{
     display: flex;
@@ -103,7 +103,7 @@ section .title::after{
     font-weight: 600;
 }
 .navbar .logo a span{
-    color: teal;
+    color: rgb(230, 244, 244);
     transition: all 0.3s ease;
 }
 .navbar.sticky .logo a span{
@@ -167,24 +167,45 @@ section .title::after{
 
 
 /* homes section styling */
+.home-img {
+    width: 100%;
+    height: 90%;
+    object-fit: cover;
+  }
 .homes{
     display: flex;
     background: url("images/flat-lay-workstation-with-copy-space-laptop.jpg") no-repeat center;
     /* background: linear-gradient(to left,rgb(12, 50, 61),black); */
     height: 100vh;
     color: #fff;
-    min-height: 500px;
     background-size: cover;
     background-attachment: fixed;
     font-family: 'Ubuntu', sans-serif;
+   
 }
 .homes .max-width{
   width: 100%;
   display: flex;
+  height: 500px;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: center;
+  /* border: solid 1px green; */
 }
+.homes-content{
+    width: 60%;  
+    /* border: 2px solid  red;  */
+    height: 300px;
+}
+.gif-content{
+    width: 40%;
+    /* border: 2px solid black ; */
+    height: 400px;
+    }
 .homes .max-width .row{
   margin-right: 0;
 }
+
 .homes .homes-content .text-1{
     font-size: 27px;
 }
@@ -198,7 +219,7 @@ section .title::after{
     margin: 5px 0;
 }
 .homes .homes-content .text-3 span{
-    color: teal;
+    color: rgb(23, 178, 178);
     font-weight: 500;
 }
 .homes .homes-content a{
@@ -217,6 +238,51 @@ section .title::after{
     color: teal;
     background: none;
 }
+.elem {
+    height: 90px;
+    width: 130px; 
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    color: black;
+    background-color: #d19509;
+    border-radius: 20px;
+  }
+
+  .elem-1 {
+    color: whitesmoke;
+    bottom: 30px;
+    right: 400px;
+  }
+
+  .elem-1 .elem-title { color: var(--vivid-sky-blue); }
+
+  .elem-2 {
+    color: whitesmoke;
+    bottom: 30px;
+    right: 100px;
+    padding: 10px;
+  }
+
+  .header-text{
+    margin-top: 20%;
+    font-size: 30px;
+}
+  .elem-title {
+    font-size:large;
+    line-height: 1.1;
+  }
+
+  .elem-text {
+    max-width: 10ch;
+    color: var(--black);
+    font-weight: var(--fw-700);
+    line-height: 1.1;
+  }
+
 
 /* about section styling */
 .about .title::after{
