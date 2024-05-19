@@ -1,223 +1,276 @@
-// $(document).ready(function(){
-//     $(window).scroll(function(){
-//         // sticky navbar on scroll script
-//         if(this.scrollY > 20){
-//             $('.navbar').addClass("sticky");
-//         }else{
-//             $('.navbar').removeClass("sticky");
-//         }
-        
-//         // scroll-up button show/hide script
-//         if(this.scrollY > 500){
-//             $('.scroll-up-btn').addClass("show");
-//         }else{
-//             $('.scroll-up-btn').removeClass("show");
-//         }
-//     });
+const navMenu = document.getElementById("nav-menu");
+navToggle = document.getElementById("nav-toggle");
+navClose = document.getElementById("nav-close");
 
-//     // slide-up script
-//     $('.scroll-up-btn').click(function(){
-//         $('html').animate({scrollTop: 0});
-//         // removing smooth scroll on slide-up button click
-//         $('html').css("scrollBehavior", "auto");
-//     });
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
+        navMenu.classList.add('show-menu');
+    })
+}
+if (navClose) {
+    navClose.addEventListener('click', () => {
+        navMenu.classList.remove('show-menu');
+    })
+}
 
-//     $('.navbar .menu li a').click(function(){
-//         // applying again smooth scroll on menu items click
-//         $('html').css("scrollBehavior", "smooth");
-//     });
+/*==================== REMOVE MENU MOBILE ====================*/
+const navLink = document.querySelectorAll(".nav_link");
 
-//     // toggle menu/navbar script
-//     $('.menu-btn').click(function(){
-//         $('.navbar .menu').toggleClass("active");
-//         $('.menu-btn i').toggleClass("active");
-//     });
+function linkAction() {
+    const navMenu = document.getElementById("nav-menu");
+    navMenu.classList.remove('show-menu');
+}
+navLink.forEach(n => n.addEventListener('click', linkAction));
 
-//     // typing text animation script
-//     var typed = new Typed(".typing", {
-//         strings: ["A FullStack Developer", "A MERN Stack Developer"],
-//         typeSpeed: 100,
-//         backSpeed: 60,
-//         loop: true
-//     });
+/*==================== SKILLS ====================*/
+const skillsContent = document.getElementsByClassName("skills_content");
 
-//     var typed = new Typed(".typing-2", {
-//         strings: ["A FullStack Developer", "A MERN Stack Developer"],
-//         typeSpeed: 100,
-//         backSpeed: 60,
-//         loop: true
-//     });
+skillsHeader = document.querySelectorAll(".skills_header");
 
-//     // owl carousel script
-//     $('.carousel').owlCarousel({
-//         margin: 20,
-//         loop: true,
-//         autoplay: true,
-//         autoplayTimeOut: 2000,
-//         autoplayHoverPause: true,
-//         responsive: {
-//             0:{
-//                 items: 1,
-//                 nav: false
-//             },
-//             600:{
-//                 items: 2,
-//                 nav: false
-//             },
-//             1000:{
-//                 items: 3,
-//                 nav: false
-//             }
-//         }
-//     });
-//     const elemTitle = document.querySelector('.elem-title');
+function toggleSkills() {
+    let itemClass = this.parentNode.className;
 
-//     const targetNumber = 500;
+    for (i = 0; i < skillsContent.length; i++) {
+        skillsContent[i].className = "skills_content skills_close";
+    }
+    if (itemClass == "skills_content skills_close") {
+        this.parentNode.className = "skills_content skills_open";
+    }
+}
 
-//     const duration = 10000; 
+skillsHeader.forEach((element) => {
+    element.addEventListener('click', toggleSkills);
+})
 
-//     const increment = Math.ceil(targetNumber / (duration / 100));
+/*==================== QUALIFICATION ====================*/
+const tabs = document.querySelectorAll('[data-target]')
+tabContents = document.querySelectorAll('[data-content]')
 
-//     let currentNumber = 0;
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
 
-//     function updateNumber() {
-//         elemTitle.textContent = currentNumber;
-//         if (currentNumber < targetNumber) {
-//             currentNumber += increment;
-//             requestAnimationFrame(updateNumber);
-//         }
-//     }
+        const target = document.querySelector(tab.dataset.target)
 
-//     window.addEventListener('load', () => {
-//         updateNumber();
-//     });
+        tabContents.forEach(tabContent => {
+            tabContent.classList.remove('qualification_active')
+        })
+        target.classList.add('qualification_active')
 
-//     const elemTitle2 = document.querySelector('.elem-2 .elem-title');
+        tab.forEach(tab => {
+            tab.classList.remove('qualification_active')
+        })
+        tab.classList.add('qualification_active')
+    })
+})
 
-//     // Set the target number
-//     const targetNumber2 = 1200; // Replace with your desired number
 
-//     // Set the duration of the animation in milliseconds
-//     const duration2 = 20000; // Adjust as needed
 
-//     // Calculate the increment value for each frame
-//     const increment2 = Math.ceil(targetNumber2 / (duration2 / 100));
+/*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
+const sections = document.querySelectorAll('section[id]')
 
-//     let currentNumber2 = 0;
+function scrollActive() {
+    const scrollY = window.pageYOffset
 
-//     // Function to update the displayed number and schedule the next update
-//     function updateNumber2() {
-//         elemTitle2.textContent = currentNumber2;
-//         if (currentNumber2 < targetNumber2) {
-//             currentNumber2 += increment2;
-//             requestAnimationFrame(updateNumber2);
-//         }
-//     }
+    sections.forEach(current => {
+        const sectionHeight = current.offsetHeight
 
-//     // Start the animation when the page is loaded
-//     window.addEventListener('load', () => {
-//         updateNumber2();
-//     });
+        const sectionTop = current.offsetTop - 50;
 
-//     document.getElementById('resume-link-1').addEventListener('click', function() {
-//         window.open(
-//           "https://drive.google.com/file/d/1onvQQUi4bc_pJnfWkKESlSxbDhprB329/view?usp=sharing"
-//         );
-//       });
+        sectionId = current.getAttribute('id')
+
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            document.querySelector('.nav_menu a[href*=' + sectionId + ']').classList.add('active-link')
+        } else {
+            document.querySelector('.nav_menu a[href*=' + sectionId + ']').classList.remove('active-link')
+        }
+    })
+}
+window.addEventListener('scroll', scrollActive)
+
+/*==================== CHANGE BACKGROUND HEADER ====================*/
+function scrollHeader() {
+    const nav = document.getElementById('header')
+    // When the scroll is greater than 200 viewport height, add the scroll-header class to the header tag
+
+    if (this.scrollY >= 80) nav.classList.add('scroll-header'); else nav.classList.remove('scroll-header')
+}
+window.addEventListener('scroll', scrollHeader)
+
+/*==================== SHOW SCROLL TOP ====================*/
+function scrollUp() {
+    const scrollUp = document.getElementById('scroll-up');
+    // When the scroll is higher than 560 viewport height, add the show-scroll class to the a tag with the scroll-top class
+    if (this.scrollY >= 560) scrollUp.classList.add('show-scroll'); else scrollUp.classList.remove('show-scroll')
+}
+window.addEventListener('scroll', scrollUp)
+
+/*==================== DARK LIGHT THEME ====================*/
+const themeButton = document.getElementById('theme-button')
+const darkTheme = 'dark-theme'
+const iconTheme = 'uil-sun'
+// Previously selected topic (if user selected)
+const selectedTheme = localStorage.getItem('selected-theme')
+
+const selectedIcon = localStorage.getItem('selected-icon')
+
+
+// We obtain the current theme that the interface has by validating the dark-theme class
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun'
+
+// We validate if the user previously chose a topic
+if (selectedTheme) {
+    // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
+    document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
     
-//       document.getElementById('resume-button-2').addEventListener('click', function() {
-//         window.open(
-//           "https://drive.google.com/file/d/1onvQQUi4bc_pJnfWkKESlSxbDhprB329/view?usp=sharing"
-//         );
-//       });
-   
-
-// });
-
-
-$(document).ready(function(){
-    $(window).scroll(function(){
-        // sticky navbar on scroll script
-        if(this.scrollY > 20){
-            $('.navbar').addClass("sticky");
-        }else{
-            $('.navbar').removeClass("sticky");
-        }
-        
-        // scroll-up button show/hide script
-        if(this.scrollY > 500){
-            $('.scroll-up-btn').addClass("show");
-        }else{
-            $('.scroll-up-btn').removeClass("show");
-        }
-    });
-
-    // slide-up script
-    $('.scroll-up-btn').click(function(){
-        $('html').animate({scrollTop: 0});
-        // removing smooth scroll on slide-up button click
-        $('html').css("scrollBehavior", "auto");
-    });
-
-    $('.navbar .menu li a').click(function(){
-        // applying again smooth scroll on menu items click
-        $('html').css("scrollBehavior", "smooth");
-    });
-
-    // toggle menu/navbar script
-    $('.menu-btn').click(function(){
-        $('.navbar .menu').toggleClass("active");
-        $('.menu-btn i').toggleClass("active");
-    });
-
-    // typing text animation script
-    var typed = new Typed(".typing", {
-        strings: ["A FullStack Developer", "A MERN Stack Developer"],
-        typeSpeed: 100,
-        backSpeed: 60,
-        loop: true
-    });
-
-    var typed = new Typed(".typing-2", {
-        strings: ["A FullStack Developer", "A MERN Stack Developer"],
-        typeSpeed: 100,
-        backSpeed: 60,
-        loop: true
-    });
-
-    // owl carousel script
-    $('.carousel').owlCarousel({
-        margin: 20,
-        loop: true,
-        autoplay: true,
-        autoplayTimeOut: 2000,
-        autoplayHoverPause: true,
-        responsive: {
-            0:{
-                items: 1,
-                nav: false
-            },
-            600:{
-                items: 2,
-                nav: false
-            },
-            1000:{
-                items: 3,
-                nav: false
-            }
-        }
-    });
-    document.getElementById('resume-link-1').addEventListener('click', function() {
-        window.open(
-          "https://drive.google.com/file/d/1Ecf9pluTW3G51_JS7qN__3BcXlNkC-N0/view?usp=sharing"
-        );
-      });
+    themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
+}
+// Activate / deactivate the theme manually with the button
+themeButton.addEventListener('click', () => {
     
-      document.getElementById('resume-button-2').addEventListener('click', function() {
-        window.open(
-          "https://drive.google.com/file/d/1Ecf9pluTW3G51_JS7qN__3BcXlNkC-N0/view?usp=sharing"
-        );
-      });
-   
+    // Add or remove the dark / icon theme
+    document.body.classList.toggle(darkTheme)
 
+    themeButton.classList.toggle(iconTheme)
+
+
+
+
+
+    
+    // We save the theme and the current icon that the user chose
+    localStorage.setItem('selected-theme', getCurrentTheme())
+
+    localStorage.setItem('selected-icon', getCurrentIcon())
+
+
+})
+
+// slider
+
+let container1 = document.getElementById("portfolio_img001");
+// container2.style.marginLeft = "80px";
+
+let img1 = document.createElement("img");
+img1.style.width = "600px";
+img1.style.height = "320px";
+img1.style.borderRadius = "0.5rem";
+
+container1.appendChild(img1);
+
+
+let imageArr = [
+  "./images/AtlasianHomePage.png", 
+];
+
+let index = 0;
+
+setInterval(() => {
+  if (index >= imageArr.length) {
+    index = 0;
+  }
+img1.src = imageArr[index++];
+}, 1500);
+
+
+// 2nd project
+
+let container2 = document.getElementById("portfolio_img002");
+// container2.style.marginLeft = "80px";
+
+let img2 = document.createElement("img");
+img2.style.width = "600px";
+img2.style.height = "320px";
+img2.style.borderRadius = "0.5rem";
+
+container2.appendChild(img2);
+
+
+let imageArr2 = [
+    "./images/AirBnb.png",
+
+];
+
+let index2 = 0;
+
+setInterval(() => {
+  if (index2 >= imageArr2.length) {
+    index2 = 0;
+  }
+img2.src = imageArr2[index2++];
+}, 1500);
+
+
+// 3rd project
+
+// let container3 = document.getElementById("portfolio_img003");
+// // container2.style.marginLeft = "80px";
+
+// let img3 = document.createElement("img");
+// img3.style.width = "600px";
+// img3.style.height = "320px";
+// img3.style.borderRadius = "0.5rem";
+
+// container3.appendChild(img3);
+
+
+// let imageArr3 = [
+//   "./images/figma.png"
+
+// ];
+
+// let index3 = 0;
+
+// setInterval(() => {
+//   if (index3 >= imageArr3.length) {
+//     index3 = 0;
+//   }
+// img3.src = imageArr3[index3++];
+// }, 1500);
+
+
+
+// 3nd project
+
+let container4 = document.getElementById("portfolio_img004");
+// container2.style.marginLeft = "80px";
+
+let img4 = document.createElement("img");
+img4.style.width = "600px";
+img4.style.height = "320px";
+img4.style.borderRadius = "0.5rem";
+
+container4.appendChild(img4);
+
+
+let imageArr4 = [
+  "./images/figma.png"
+];
+
+let index4 = 0;
+
+setInterval(() => {
+  if (index4 >= imageArr4.length) {
+    index4 = 0;
+  }
+img4.src = imageArr4[index4++];
+}, 1500);
+
+
+// resume
+
+document.getElementById('resume-button-1').addEventListener('click', function() {
+  window.open(
+    "https://drive.google.com/file/d/1IKL0oOJSi5aJAbx0y-4ODsZZAAupihZa/view?usp=sharing"
+  );
 });
+
+document.getElementById('resume-button-2').addEventListener('click', function() {
+  window.open(
+    "https://drive.google.com/file/d/1IKL0oOJSi5aJAbx0y-4ODsZZAAupihZa/view?usp=sharing"
+);
+});
+
+
+
