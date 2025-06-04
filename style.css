@@ -325,7 +325,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: var(--small-font-size);
+    font-size: var(--medium-font-size);
     color: var(--title-color);
     font-weight: var(--font-medium);
     transition: 0.5s;
@@ -412,7 +412,7 @@
   .home_blob-img {
     width: 175px;
     transition: 0.5s;
-    border-radius: 10%;
+    border-radius: 2%;
   }
   .home_blob-img:hover {
     transform-origin: 50% 50%;
@@ -433,7 +433,7 @@
   .home_subtitle {
     font-size: var(--h2-font-size);
     /* color: var(--text-color); */
-color: orangered;
+   /* color: rgb(7, 56, 52); */
     font-weight: var(--font-semi-bold);
     margin-bottom: var(--mb-1);
   }
